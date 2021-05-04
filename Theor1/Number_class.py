@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 
+'''Класс, в котором хранятся число (из ряда),
+ кол-во в ряде и его вероятность в выборке'''
 
 
 class NumberWithProbability():
@@ -13,6 +15,7 @@ class NumberWithProbability():
         return f"{self.number} | {self.count} | {self.probability}"
 
 
+# Вывод таблицы со стат. рядом
 def printTable(l: list):
     length = 150
     print("\n", "".center(length, '='), '\n', " Таблица распределения ".center(length, '='), '\n',
@@ -26,6 +29,8 @@ def printTable(l: list):
     print(*[f"-------" for x in l])
     print('\n')
 
+
+# Массив точек для постройки графика эмпирической функции распределения
 # flag = True - отображение эмп. фун-ции в консоль
 def getEmpiricalFunction(nums: list, flag=False):
     __probability = 0
@@ -71,6 +76,8 @@ def getEmpiricalFunction(nums: list, flag=False):
 
     return point_list
 
+
+# Массив точек для постройки графика статического распределения
 def getPointForStaticGraphic(nums: list) -> list:
     point_list = []
 
@@ -80,6 +87,7 @@ def getPointForStaticGraphic(nums: list) -> list:
     return point_list
 
 
+# рисует график по точкам
 def drawFunction(points: list, tittle=None):
     x_axis = []
     y_axis = []
@@ -98,8 +106,13 @@ def drawFunction(points: list, tittle=None):
     plt.plot(x_axis, y_axis)
     plt.show()
 
+
 def drawBarGraph(nums: list):
     # data = pd.DataFrame(data=np.c_[iris['data'], iris['target']], columns=iris['feature_names'] + ['target'])
+    pass
+
+
+def preGraphFunction(nums: list):
     pass
 
 def toFixed(numObj, digits=2):
