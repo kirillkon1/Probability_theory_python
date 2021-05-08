@@ -17,7 +17,7 @@ class NumberWithProbability():
 
 # Вывод таблицы со стат. рядом
 def printTable(l: list):
-    length = 150
+    length = len(l) * 8
     print("\n", "".center(length, '='), '\n', " Таблица распределения ".center(length, '='), '\n',
           "".center(length, '='), '\n')
     print(*[f"-------" for x in l])
@@ -59,21 +59,6 @@ def getEmpiricalFunction(nums: list, flag=False):
 
     point_list.append([nums[len(nums) - 1].number + 0.5, tmp1])
 
-    # for i in nums:
-    #     if flag:
-    #
-    #         if tmp == '-':
-    #             print(f"{toFixed(__probability)}, x ≤ {i.number}")
-    #         else:
-    #             print(f"{toFixed(__probability)}, {tmp} < x ≤ {i.number}".center(15, " "))
-    #         tmp = i.number
-    #
-    #     __probability = __probability + i.probability
-    #     point_list.append([i.number, i.probability])
-    #
-    # if flag:
-    #     print(f"   {1}, x > {nums[len(nums) - 1].number}")
-
     return point_list
 
 
@@ -107,13 +92,25 @@ def drawFunction(points: list, tittle=None):
     plt.show()
 
 
-def drawBarGraph(nums: list):
-    # data = pd.DataFrame(data=np.c_[iris['data'], iris['target']], columns=iris['feature_names'] + ['target'])
-    pass
+# Нарисовать гистограмму
+def drawBarGraph(graph_list: list, border):
+    plt.hist(graph_list, border, density=True)
+    plt.ylabel('Probability p(x)')
+    plt.xlabel('x')
+    plt.show()
+    return 1
 
 
-def preGraphFunction(nums: list):
-    pass
+# Границы для гистограммы
+def preGraphFunction(nums: list, border: list):
+    graph_list = []
+    for i in range(len(border) - 1):
+        for num in nums:
+            if border[i] <= num < border[i + 1]:
+                graph_list.append(border[i])
+
+    return graph_list
+
 
 def toFixed(numObj, digits=2):
     try:

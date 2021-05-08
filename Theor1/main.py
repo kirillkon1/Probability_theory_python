@@ -1,10 +1,16 @@
 import math
 from collections import Counter
+
 from Number_class import NumberWithProbability, printTable, toFixed, drawFunction, getPointForStaticGraphic, \
-    getEmpiricalFunction
+    getEmpiricalFunction, preGraphFunction, drawBarGraph
 
 digits_list = [-0.76, -0.55, -0.62, 0.21, -1.31, 0.64, -0.21, -1.07, 0.21, 1.16,
                -1.14, 1.07, -0.14, -1.45, 1.45, 0.24, 1.46, 1.04, -0.31, -1.12]
+
+# digits_list = [-0.76, -0.55, -0.62, 0.21, -1.31, 0.64, -0.21, -1.07, 0.21, 1.16,
+#                -1.14, 1.07, -0.14, -1.45, 1.45, 0.24, 1.46, 1.04, -0.31, -1.12,
+#                1.13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
 digits_set = set(digits_list)
 
 
@@ -17,13 +23,13 @@ if __name__ == '__main__':
     # ------ вариационный ряд -------
     digits_list.sort()
     variation_range = digits_list
-    # print(variation_range)
+    print(f"\nВариационный рад : {variation_range}")
 
     # ----- экстремальные значения -----
     # -----  (максимум и минимум)  -----
     minimum = min(digits_list)
     maximum = max(digits_list)
-    # print(f"min = {minimum}, max = {maximum}")
+    print(f"min = {minimum}, max = {maximum}")
 
     # --- Размах выборки ----
 
@@ -37,7 +43,7 @@ if __name__ == '__main__':
             NumberWithProbability(digit, counter[digit], float(toFixed(counter[digit] / len(digits_list)))))
     number_list = sorted(number_list, key=lambda x: x.number)
 
-    # printTable(number_list)
+    printTable(number_list)
 
     math_expectation = 0  # M(x)
     math_sqr_expectation = 0  # M(x^2)
@@ -48,14 +54,13 @@ if __name__ == '__main__':
     dispersion = math_sqr_expectation - math_expectation ** 2  # M(x^2) - M(x)
     standard_deviation = math.sqrt(dispersion)
 
-
-    # drawFunction(getPointForGraphic(number_list), "полигон приведенных частот")
-    # drawFunction(getEmpiricalFunction(number_list, False), "график эмпирической фукнции распределения")
+    drawFunction(getPointForStaticGraphic(number_list), "полигон приведенных частот")
+    drawFunction(getEmpiricalFunction(number_list, False), "график эмпирической фукнции распределения")
 
     # --- Гистограмма ---
     h = float(toFixed((maximum - minimum) / (1 + math.log(len(number_list), 2))))
 
-    x = minimum - h/2
+    x = minimum - h / 2
     bbb = []
     print(h)
     while x <= maximum:
@@ -63,5 +68,6 @@ if __name__ == '__main__':
         x += h
     else:
         bbb.append(x)
-    # print(bbb)
+    preGraphList = preGraphFunction(digits_list, bbb)
 
+    drawBarGraph(digits_list, bbb)
