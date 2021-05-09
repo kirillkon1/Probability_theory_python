@@ -43,7 +43,7 @@ if __name__ == '__main__':
         math_expectation = math_expectation + NUMBER.number * NUMBER.probability
         math_sqr_expectation = math_sqr_expectation + NUMBER.number ** 2 * NUMBER.probability
 
-    dispersion = math_sqr_expectation - math_expectation ** 2  # M(x^2) - M(x)
+    dispersion = math_sqr_expectation - math_expectation ** 2  # M(x^2) - M(x)^2
     standard_deviation = math.sqrt(dispersion)
 
     print(f"Математическое ожидание = {toFixed(math_expectation)}\n"
