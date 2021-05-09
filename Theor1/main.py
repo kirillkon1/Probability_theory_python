@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
     x = minimum - h / 2
     border_list = []
-    print(h)
+
     while x <= maximum:
         border_list.append(x)
         x += h
