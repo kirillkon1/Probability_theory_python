@@ -51,7 +51,7 @@ if __name__ == '__main__':
           f"СКО = {toFixed(standard_deviation)}\n")
 
     drawFunction(getPointForStaticGraphic(number_list), "полигон приведенных частот")
-    drawFunction(getEmpiricalFunction(number_list, False), "график эмпирической фукнции распределения")
+    drawFunction(getEmpiricalFunction(number_list, False), "график эмпирической функции распределения")
 
     # --- Гистограмма ---
     h = float(toFixed((maximum - minimum) / (1 + math.log(len(number_list), 2))))
