@@ -13,7 +13,7 @@ if __name__ == '__main__':
     # ------ вариационный ряд -------
     digits_list.sort()
     variation_range = digits_list
-    print(f"\nВариационный рад : {variation_range}")
+    print(f"\nВариационный ряд : {variation_range}")
 
     # ----- экстремальные значения -----
     # -----  (максимум и минимум)  -----
