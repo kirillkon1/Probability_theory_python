@@ -63,12 +63,13 @@ def getEmpiricalFunction(nums: list, flag=False):
 
 
 # Массив точек для постройки графика статического распределения
-def getPointForStaticGraphic(nums: list) -> list:
+def getPointForStaticGraphic(border_list: list, result_list: list, h) -> list:
     point_list = []
 
-    for i in nums:
-        point_list.append([i.number, i.probability])
+    for i in range(len(border_list) - 1):
+        point_list.append([border_list[i] + h/2, result_list[i]])
 
+    # print("тттт",point_list)
     return point_list
 
 
@@ -93,18 +94,23 @@ def drawFunction(points: list, tittle=None):
 
 
 # Нарисовать гистограмму
-def drawBarGraph(graph_list: list, border):
-    plt.hist(graph_list, border, density=True)
+def drawBarGraph(graph_list_index: list, graph_list_result: list) -> None:
+    # plt.hist(graph_list, border, density=True)
+
+    plt.bar(graph_list_index, graph_list_result)
     plt.ylabel('Probability p(x)')
     plt.xlabel('x')
+    plt.rcParams['font.size'] = '5'
     plt.show()
-    return 1
 
 
 # Границы для гистограммы
 def preGraphFunction(nums: list, border: list):
     graph_list = []
+    count = []
+
     for i in range(len(border) - 1):
+        counter = 0
         for num in nums:
             if border[i] <= num < border[i + 1]:
                 graph_list.append(border[i])
